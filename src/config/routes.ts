@@ -6,7 +6,8 @@ export const ROUTES = {
   LOGIN: "/login",
   NOT_FOUND: "*",
   DASHBOARD: {
-    ROOT: `/${DASHBOARD_PATH}`,
-    PROFILE: `/${DASHBOARD_PATH}/profile`,
+    ROOT: `${DASHBOARD_PATH}`,
+    PROFILE: `${DASHBOARD_PATH}/profile`,
+    CREATE_RAFFLE: `${DASHBOARD_PATH}/nuevo-sorteo`,
   },
 };

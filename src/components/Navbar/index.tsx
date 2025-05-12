@@ -14,19 +14,32 @@ export const Navbar = () => {
           </li>
 
           <li className="flex items-center gap-4">
-            <Button asChild>
-              <Link to={ROUTES.LOGIN}>Iniciar Sesión</Link>
-            </Button>
-            <Button variant={"secondary"} asChild>
-              <Link to={ROUTES.REGISTER}>Registrarse</Link>
-            </Button>
-            {isSignedIn && (
-              <SignOutButton>
-                <button>
-                  <FaSignOutAlt />
-                  ''
-                </button>
-              </SignOutButton>
+            {isSignedIn ? (
+              <>
+                <Link to={ROUTES.DASHBOARD.ROOT}>Dashboard</Link>
+
+                <Link to={ROUTES.DASHBOARD.CREATE_RAFFLE}>Crear Rifa</Link>
+
+                <SignOutButton>
+                  <Button
+                    variant={"outline"}
+                    type="button"
+                    className="flex items-center gap-2 text-red-500  border-red-500"
+                  >
+                    Cerrar Sesión
+                    <FaSignOutAlt />
+                  </Button>
+                </SignOutButton>
+              </>
+            ) : (
+              <>
+                <Button asChild>
+                  <Link to={ROUTES.LOGIN}>Iniciar Sesión</Link>
+                </Button>
+                <Button variant={"secondary"} asChild>
+                  <Link to={ROUTES.REGISTER}>Registrarse</Link>
+                </Button>
+              </>
             )}
           </li>
         </ul>

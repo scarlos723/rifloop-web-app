@@ -4,6 +4,7 @@ import { NotFound } from "./components/NotFound";
 import { ROUTES } from "./config/routes";
 import { LandingLayout } from "./LandingLayout";
 import { Dashboard } from "./pages/Dashboard";
+import { RaffleForm } from "./pages/Dashboard/RaffleForm";
 import { Home } from "./pages/Home";
 import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
@@ -33,13 +34,21 @@ function App() {
               index: true,
               element: <Dashboard />,
             },
+            {
+              path: ROUTES.DASHBOARD.PROFILE,
+              element: <div>Perfil</div>,
+            },
+            {
+              path: ROUTES.DASHBOARD.CREATE_RAFFLE,
+              element: <RaffleForm />,
+            },
           ],
         },
+        {
+          path: ROUTES.NOT_FOUND,
+          element: <NotFound />,
+        },
       ],
-    },
-    {
-      path: ROUTES.NOT_FOUND,
-      element: <NotFound />,
     },
   ]);
   return element;
