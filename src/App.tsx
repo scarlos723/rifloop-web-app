@@ -1,0 +1,48 @@
+import { useRoutes } from "react-router-dom";
+import { AuthGuard } from "./components/AuthGuard";
+import { NotFound } from "./components/NotFound";
+import { ROUTES } from "./config/routes";
+import { LandingLayout } from "./LandingLayout";
+import { Dashboard } from "./pages/Dashboard";
+import { Home } from "./pages/Home";
+import { Login } from "./pages/Login";
+import { Register } from "./pages/Register";
+
+function App() {
+  const element = useRoutes([
+    {
+      element: <LandingLayout />,
+      children: [
+        {
+          path: ROUTES.HOME,
+          element: <Home />,
+        },
+        {
+          path: ROUTES.REGISTER,
+          element: <Register />,
+        },
+        {
+          path: ROUTES.LOGIN,
+          element: <Login />,
+        },
+        {
+          path: ROUTES.DASHBOARD.ROOT,
+          element: <AuthGuard />,
+          children: [
+            {
+              index: true,
+              element: <Dashboard />,
+            },
+          ],
+        },
+      ],
+    },
+    {
+      path: ROUTES.NOT_FOUND,
+      element: <NotFound />,
+    },
+  ]);
+  return element;
+}
+
+export default App;
