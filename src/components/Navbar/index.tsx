@@ -1,8 +1,10 @@
 import { ROUTES } from "@/config/routes";
+import { SignOutButton, useUser } from "@clerk/clerk-react";
+import { FaSignOutAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { Button } from "../ui/button";
-
 export const Navbar = () => {
+  const { isSignedIn } = useUser();
   return (
     <header className="px-10 py-4">
       <nav className="rounded-full py-4 px-10 shadow-md ">
@@ -18,6 +20,14 @@ export const Navbar = () => {
             <Button variant={"secondary"} asChild>
               <Link to={ROUTES.REGISTER}>Registrarse</Link>
             </Button>
+            {isSignedIn && (
+              <SignOutButton>
+                <button>
+                  <FaSignOutAlt />
+                  ''
+                </button>
+              </SignOutButton>
+            )}
           </li>
         </ul>
       </nav>
