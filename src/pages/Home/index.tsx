@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export const Home = () => {
   return (
-    <main className="container py-10">
+    <main className="container py-10 mt-10">
       <div className="text-center grid gap-8">
         <h1 className="text-5xl font-bold">
           Crea y Administra Tus Sorteos de Forma Fácil y Rápida
