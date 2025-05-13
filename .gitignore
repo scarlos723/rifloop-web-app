@@ -24,4 +24,6 @@ dist-ssr
 *.sw?
 pnpm-lock.yaml
 package-lock.json
+yarn-error.log
+yarn.lock
 *.env
