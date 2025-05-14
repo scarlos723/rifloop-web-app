@@ -36,7 +36,7 @@ type FormFieldContainerProps = {
     | "currency";
   description?: string;
 };
-const CustomDatePicker = (props: { field: any }) => {
+const CustomDatePicker = (props: { field: any; placeholder?: string }) => {
   const { field } = props;
   return (
     <Popover>
@@ -52,7 +52,7 @@ const CustomDatePicker = (props: { field: any }) => {
             {field.value ? (
               format(field.value, "PPP")
             ) : (
-              <span>Pick a date</span>
+              <span>{props.placeholder || "Selecciona una fecha"}</span>
             )}
             <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
           </Button>
@@ -137,7 +137,9 @@ export const FormFieldContainer = (props: FormFieldContainerProps) => {
           {isBasicInput(type) && (
             <BasicInput field={field} placeholder={placeholder} type={type} />
           )}
-          {type === "date_picker" && <CustomDatePicker field={field} />}
+          {type === "date_picker" && (
+            <CustomDatePicker field={field} placeholder={placeholder} />
+          )}
           {type === "textarea" && (
             <TextArea field={field} placeholder={placeholder} />
           )}

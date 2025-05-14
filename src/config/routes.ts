@@ -9,5 +9,6 @@ export const ROUTES = {
     ROOT: `${DASHBOARD_PATH}`,
     PROFILE: `${DASHBOARD_PATH}/profile`,
     CREATE_RAFFLE: `${DASHBOARD_PATH}/nuevo-sorteo`,
+    LIST_RAFFLES: `${DASHBOARD_PATH}/sorteos`,
   },
 };

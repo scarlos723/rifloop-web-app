@@ -5,6 +5,7 @@ import { ROUTES } from "./config/routes";
 import { LandingLayout } from "./LandingLayout";
 import { Dashboard } from "./pages/Dashboard";
 import { RaffleForm } from "./pages/Dashboard/RaffleForm";
+import { Raffles } from "./pages/Dashboard/Raffles";
 import { Home } from "./pages/Home";
 import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
@@ -41,6 +42,10 @@ function App() {
             {
               path: ROUTES.DASHBOARD.CREATE_RAFFLE,
               element: <RaffleForm />,
+            },
+            {
+              path: ROUTES.DASHBOARD.LIST_RAFFLES,
+              element: <Raffles />,
             },
           ],
         },

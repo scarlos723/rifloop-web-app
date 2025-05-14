@@ -1,12 +1,22 @@
-import { Button } from "@/components/ui/button";
-import { ROUTES } from "@/config/routes";
 import type { Raffle } from "@/models/raffles.model";
 import { getAllRaffles } from "@/services/raffles.service";
 import { format } from "date-fns";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-export const Dashboard = () => {
+export const Raffles = () => {
   const [raffles, setRaffles] = useState<Raffle[]>([]);
+
+  const dateToFormatString = (date?: Date) => {
+    return date ? format(date, "yyyy-MM-dd") : "Hasta vender todos los tikets"; // Formato YYYY-MM-DD
+  };
+
+  const formatNumberToCurrency = (number: number) => {
+    return new Intl.NumberFormat("es-CO", {
+      style: "currency",
+      currency: "COP",
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }).format(number);
+  };
 
   useEffect(() => {
     const fetchAllRaffles = async () => {
@@ -22,41 +32,6 @@ export const Dashboard = () => {
   }, []);
   return (
     <main className="container bg-white py-10">
-      {raffles.length > 0 ? <RafflesList raffles={raffles} /> : <NoRaffles />}
-    </main>
-  );
-};
-
-const NoRaffles = () => (
-  <div className="container">
-    <div className="container text-center py-10">
-      <h1 className="text-2xl font-bold mb-4">No tienes rifas creadas</h1>
-      <p className="text-gray-600 mb-6">
-        Aún no has creado ninguna rifa. ¡Por favor, crea una para comenzar!
-      </p>
-      <Button asChild>
-        <Link to={ROUTES.DASHBOARD.CREATE_RAFFLE}>Crear una rifa</Link>
-      </Button>
-    </div>
-  </div>
-);
-
-const RafflesList = ({ raffles }: { raffles: Raffle[] }) => {
-  const dateToFormatString = (date?: Date) => {
-    return date ? format(date, "yyyy-MM-dd") : "Hasta vender todos los tikets"; // Formato YYYY-MM-DD
-  };
-
-  const formatNumberToCurrency = (number: number) => {
-    return new Intl.NumberFormat("es-CO", {
-      style: "currency",
-      currency: "COP",
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
-    }).format(number);
-  };
-
-  return (
-    <>
       <h2 className="text-2xl font-bold mb-5">Tus rifas</h2>
       <div className=" grid lg:grid-cols-3 gap-4">
         {raffles.map((raffle) => (
@@ -85,6 +60,6 @@ const RafflesList = ({ raffles }: { raffles: Raffle[] }) => {
           </div>
         ))}
       </div>
-    </>
+    </main>
   );
 };

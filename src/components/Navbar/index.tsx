@@ -16,9 +16,16 @@ export const Navbar = () => {
           <li className="flex items-center gap-4">
             {isSignedIn ? (
               <>
-                <Link to={ROUTES.DASHBOARD.ROOT}>Dashboard</Link>
+                <Link className="hidden lg:block" to={ROUTES.DASHBOARD.ROOT}>
+                  Dashboard
+                </Link>
 
-                <Link to={ROUTES.DASHBOARD.CREATE_RAFFLE}>Crear Rifa</Link>
+                <Link
+                  className="hidden lg:block"
+                  to={ROUTES.DASHBOARD.CREATE_RAFFLE}
+                >
+                  Crear Rifa
+                </Link>
 
                 <SignOutButton>
                   <Button
@@ -26,7 +33,7 @@ export const Navbar = () => {
                     type="button"
                     className="flex items-center gap-2 text-red-500  border-red-500"
                   >
-                    Cerrar Sesión
+                    <span className="hidden lg:block">Cerrar Sesión</span>
                     <FaSignOutAlt />
                   </Button>
                 </SignOutButton>

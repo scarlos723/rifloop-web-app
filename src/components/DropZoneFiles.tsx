@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 
 export const DropZoneFiles = (props: {
@@ -8,10 +8,28 @@ export const DropZoneFiles = (props: {
 }) => {
   const { onDropFnc, maxFiles, onlyImages } = props;
 
+  const [listFiles, setListFiles] = useState<File[]>([]);
+
   const onDrop = useCallback((acceptedFiles: File[]) => {
     if (maxFiles && acceptedFiles.length > maxFiles) return;
-    onDropFnc(acceptedFiles);
+
+    setListFiles((prev) => {
+      const newFiles = [...prev, ...acceptedFiles];
+      if (maxFiles && newFiles.length > maxFiles) {
+        return newFiles.slice(0, maxFiles);
+      }
+      onDropFnc(newFiles);
+      return newFiles;
+    });
   }, []);
+
+  const onRemoveFile = (file: File) => {
+    setListFiles((prev) => {
+      const newFiles = prev.filter((f) => f.name !== file.name);
+      onDropFnc(newFiles);
+      return newFiles;
+    });
+  };
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
@@ -19,16 +37,37 @@ export const DropZoneFiles = (props: {
   });
 
   return (
-    <div {...getRootProps()} className="border-2 border-dashed p-4 rounded-md ">
-      <input {...getInputProps()} />
-      {isDragActive ? (
-        <p>Suelta los archivos aquí ...</p>
-      ) : (
-        <p>
-          Arrastra y suelta algunos archivos aquí, o haz clic para seleccionar
-          archivos
-        </p>
-      )}
+    <div>
+      <div
+        {...getRootProps()}
+        className="border-2 border-dashed p-4 rounded-md  shadow"
+      >
+        <input {...getInputProps()} />
+        {isDragActive ? (
+          <p className="text-sm text-gray-500">Suelta los archivos aquí ...</p>
+        ) : (
+          <p className="text-sm text-gray-500 text-center">
+            Arrastra y suelta algunos archivos aquí, o haz clic para seleccionar
+            archivos
+          </p>
+        )}
+      </div>
+      <div className="flex flex-col gap-2 mt-4">
+        {listFiles.map((file, i) => (
+          <div key={i} className="text-sm text-gray-700 border px-3 rounded-sm">
+            <span>
+              - {file.name} - {file.size} bytes
+            </span>
+            <button
+              type="button"
+              className="text-red-500 ml-2"
+              onClick={() => onRemoveFile(file)}
+            >
+              X
+            </button>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
