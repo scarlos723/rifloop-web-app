@@ -1,3 +1,4 @@
+import { ImageIcon, PackagePlusIcon } from "lucide-react";
 import { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 
@@ -46,10 +47,13 @@ export const DropZoneFiles = (props: {
         {isDragActive ? (
           <p className="text-sm text-gray-500">Suelta los archivos aquí ...</p>
         ) : (
-          <p className="text-sm text-gray-500 text-center">
-            Arrastra y suelta algunos archivos aquí, o haz clic para seleccionar
-            archivos
-          </p>
+          <div className="text-sm text-gray-500 text-center flex flex-col gap-1 items-center">
+            <div>{!onlyImages ? <ImageIcon /> : <PackagePlusIcon />}</div>
+            <p className="cursor-default">
+              Arrastra y suelta algunos archivos aquí, o haz clic para
+              seleccionar archivos
+            </p>
+          </div>
         )}
       </div>
       <div className="flex flex-col gap-2 mt-4">

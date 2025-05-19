@@ -3,14 +3,25 @@ import { AuthGuard } from "./components/AuthGuard";
 import { NotFound } from "./components/NotFound";
 import { ROUTES } from "./config/routes";
 import { LandingLayout } from "./LandingLayout";
+import { initDB } from "./lib/db";
 import { Dashboard } from "./pages/Dashboard";
+import { Profile } from "./pages/Dashboard/Profile";
+import { RaffleDetail } from "./pages/Dashboard/RaffleDetails";
 import { RaffleForm } from "./pages/Dashboard/RaffleForm";
 import { Raffles } from "./pages/Dashboard/Raffles";
 import { Home } from "./pages/Home";
 import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
-
+const initializeApp = async () => {
+  try {
+    await initDB();
+    console.log("Base de datos inicializada correctamente.");
+  } catch (error) {
+    console.error("Error al inicializar la base de datos:", error);
+  }
+};
 function App() {
+  initializeApp();
   const element = useRoutes([
     {
       element: <LandingLayout />,
@@ -37,7 +48,7 @@ function App() {
             },
             {
               path: ROUTES.DASHBOARD.PROFILE,
-              element: <div>Perfil</div>,
+              element: <Profile />,
             },
             {
               path: ROUTES.DASHBOARD.CREATE_RAFFLE,
@@ -46,6 +57,11 @@ function App() {
             {
               path: ROUTES.DASHBOARD.LIST_RAFFLES,
               element: <Raffles />,
+            },
+            {
+              path: `${ROUTES.DASHBOARD.RAFFLE}`,
+
+              element: <RaffleDetail />,
             },
           ],
         },

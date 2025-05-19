@@ -6,4 +6,5 @@ export interface Raffle {
   finishDate?: Date;
   ticketsNumber: number;
   images?: string[];
+  digit: number;
 }

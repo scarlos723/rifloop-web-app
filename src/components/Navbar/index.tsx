@@ -26,6 +26,12 @@ export const Navbar = () => {
                 >
                   Crear Rifa
                 </Link>
+                <Link
+                  className="hidden lg:block"
+                  to={ROUTES.DASHBOARD.LIST_RAFFLES}
+                >
+                  Sorteos
+                </Link>
 
                 <SignOutButton>
                   <Button

@@ -7,4 +7,8 @@ export type formSchema = {
   ticketPrice: number;
   startDate: Date;
   endDate: Date;
+  digit: {
+    value: number;
+    label: string;
+  };
 };
