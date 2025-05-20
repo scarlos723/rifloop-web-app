@@ -1,12 +1,14 @@
 import { FormFieldContainer } from "@/components/FormFieldContainer";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
+import { ROUTES } from "@/config/routes";
 import type { Raffle } from "@/models/raffles.model";
 import type { Ticket } from "@/models/ticket.model";
+import { updateStateOfTickets } from "@/services/tickets.service";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { z } from "zod";
 
@@ -38,10 +40,15 @@ export const Checkout = () => {
   const [ticketsSelected, setTicketsSelected] = useState<Ticket[]>([]);
   const [raffle, setRaffle] = useState<Raffle | null>(null);
   const location = useLocation();
+  const navigate = useNavigate();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSubmit = async (data: any) => {
-    toast.success(`Compra exitosa, ${data.name} gracias por participar!`);
-    // Aquí puedes manejar la lógica de compra de tickets
+    const idList = ticketsSelected
+      .map((ticket) => ticket.id)
+      .filter((id): id is number => id !== undefined);
+    await updateStateOfTickets(idList, "sold");
+    toast.success(`Compra exitosa, enviamos un correo a ${data.email}`);
+    navigate(ROUTES.HOME);
   };
   useEffect(() => {
     const state = location.state as { tickets: Ticket[] };

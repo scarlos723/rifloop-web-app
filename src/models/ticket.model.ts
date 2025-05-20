@@ -3,6 +3,6 @@ export interface Ticket {
   raffleId: number;
   ticketNumber: string;
   ticketPrice: number;
-  ticketStatus: string;
+  ticketStatus: "available" | "sold";
   ticketDate: string;
 }

@@ -1,54 +1,24 @@
-# React + TypeScript + Vite
+# Proyecto
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Importante
 
-Currently, two official plugins are available:
+La informacion de este proyecto es de prueba, la gestion de usuarios, inicio de sesion y creacion de sorteos se creo con clerk, las imagenes se almacenan en cloudinary y la base de datos es una base de datos indexada en el navegador.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Descripcion
 
-## Expanding the ESLint configuration
+Mi proyecto es sobre una palicacion para vender los boletos de tus sorteos en linea, la idea principal del proyecto es que tu puedas crear un sorteo y vender los boletos, pero la idea principal no era comprar un boleto si no comprar una imagen de wallpaper que esta asociada a un numero de boleto, pero por temas de tiempo no pude implementar la parte de las imagenes, pensaba simplement asociar los links de las imagenes a los boletos y despues mostrarlas para dar la sensacion de que se compra una imagen que viene con un premio
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Como usar la aplicacion
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+Hay una barra de navegacion la cual tendra opciones iniciar sesion o crear una cuenta, una vez un usuario este logueado podra ir a un dashboard donde podras ver a tus sorteos, y otro para ir a crear una rifa. Tambien un boton para cerrar sesion.
+Una vez creada la rifa, esta aparecera en tu dashboard, y tambien se podra ver las rifas en la pagina principal, donde cualquier usuario podra comprar un boleto
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Tecnologias usadas
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+- Clerck
+- React
+- Node.js
+- Vite
+- Shadcn
+- CssTailwind
+-

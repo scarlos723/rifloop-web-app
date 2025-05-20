@@ -62,3 +62,41 @@ export const getTicketsByRaffleId = async (
     request.onerror = () => reject(request.error);
   });
 };
+
+export const updateStateOfTickets = async (
+  ticketIds: number[],
+  newStatus: string
+): Promise<void> => {
+  const db = await initDB();
+  return new Promise((resolve, reject) => {
+    const transaction = db.transaction(STORE_NAME, "readwrite");
+    const store = transaction.objectStore(STORE_NAME);
+
+    let updatedCount = 0;
+    ticketIds.forEach((id) => {
+      const getRequest = store.get(id);
+      getRequest.onsuccess = () => {
+        const ticket = getRequest.result;
+        if (ticket) {
+          ticket.ticketStatus = newStatus;
+          const updateRequest = store.put(ticket);
+          updateRequest.onsuccess = () => {
+            updatedCount++;
+            if (updatedCount === ticketIds.length) {
+              resolve();
+            }
+          };
+          updateRequest.onerror = () => reject(updateRequest.error);
+        } else {
+          updatedCount++;
+          if (updatedCount === ticketIds.length) {
+            resolve();
+          }
+        }
+      };
+      getRequest.onerror = () => reject(getRequest.error);
+    });
+
+    transaction.onerror = () => reject(transaction.error);
+  });
+};

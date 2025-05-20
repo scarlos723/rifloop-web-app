@@ -167,7 +167,13 @@ export const PublicRaffleDetails = () => {
         </div>
         <div className="flex flex-wrap gap-4 max-h-[500px] overflow-y-auto">
           {filteredTickets.map((ticket) => (
-            <div key={ticket.id} onClick={() => addTicketToSelected(ticket)}>
+            <div
+              key={ticket.id}
+              onClick={() =>
+                ticket.ticketStatus === "available" &&
+                addTicketToSelected(ticket)
+              }
+            >
               <TicketCard
                 item={ticket}
                 isSelected={ticketsSelected.some((t) => t.id === ticket.id)}

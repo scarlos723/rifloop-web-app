@@ -17,7 +17,12 @@ export const TicketCard = (props: { item: Ticket; isSelected?: boolean }) => {
         </div>
         <section className="bg-gray-200 dark:bg-transparent rounded-bl-2xl shadow-lg rounded-tl-2xl p-2 border">
           <p className="font-bold text-xl"> {item.ticketNumber}</p>
-          <p>{item.ticketStatus}</p>
+          <div className="w-[100px]">
+            <small>
+              {item.ticketStatus === "available" && "🟢 Disponible"}
+            </small>
+            <small>{item.ticketStatus === "sold" && "🔴 Vendido"}</small>
+          </div>
         </section>
       </div>
     </article>

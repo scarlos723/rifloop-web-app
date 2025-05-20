@@ -1,12 +1,15 @@
 import { TicketCard } from "@/components/TicketCard";
 import { Input } from "@/components/ui/input";
 import { Progress } from "@/components/ui/progress";
+import { getPublicLink } from "@/lib/publicLink";
 import type { Raffle } from "@/models/raffles.model";
 import type { Ticket } from "@/models/ticket.model";
 import { getRaffleById } from "@/services/raffles.service";
 import { getTicketsByRaffleId } from "@/services/tickets.service";
 import { useEffect, useState } from "react";
+import { GoCopy } from "react-icons/go";
 import { useSearchParams } from "react-router-dom";
+import { toast } from "sonner";
 export const RaffleDetail = () => {
   const [searchParams] = useSearchParams();
   const raffleId = searchParams.get("raffleId");
@@ -100,6 +103,33 @@ export const RaffleDetail = () => {
                     {progress}%
                   </p>
                   <Progress value={progress} className="w-full h-2" />
+                </div>
+              )}
+              {raffle.id !== undefined && (
+                <div className="mt-4">
+                  <p>
+                    <strong>Enlace público: </strong>
+                    <br />
+                    <small>
+                      Comparte este enlace para que otros puedan comprar tickets
+                    </small>
+                  </p>
+                  <button
+                    className="border p-2 flex gap-4 items-center justify-between rounded-md transition hover:bg-gray-700 cursor-copy "
+                    onClick={() => {
+                      if (!raffle.id) return;
+                      navigator.clipboard.writeText(getPublicLink(raffle.id));
+                      toast.success("Enlace copiado al portapapeles", {
+                        description: "Puedes compartirlo con tus amigos",
+                        duration: 2000,
+                      });
+                    }}
+                  >
+                    <p>{getPublicLink(raffle.id)}</p>
+                    <div>
+                      <GoCopy></GoCopy>
+                    </div>
+                  </button>
                 </div>
               )}
             </div>
