@@ -27,7 +27,7 @@ export const Home = () => {
         </div>
       </div>
       <section className="mt-10">
-        <h2 className="text-2xl font-bold mb-5">sorteos destacadas</h2>
+        <h2 className="text-2xl font-bold mb-5">Sorteos destacados</h2>
         <ListRaffles />
       </section>
     </main>
