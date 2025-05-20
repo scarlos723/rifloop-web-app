@@ -20,7 +20,7 @@ export const CustomDatePicker = (props: {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <FormControl>
+        <FormControl className="bg-transparent hover:bg-white/10">
           <Button
             variant={"outline"}
             className={cn(

@@ -38,7 +38,7 @@ export const ReactSelector = (props: {
         control: (baseStyles) => ({
           ...baseStyles,
           borderRadius: "0.375rem",
-          backgroundColor: isDark ? "#adadad16" : "#fff",
+          backgroundColor: isDark ? "#adadad16" : "transparent",
         }),
       }}
     />

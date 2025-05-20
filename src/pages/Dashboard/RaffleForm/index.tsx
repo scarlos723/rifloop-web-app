@@ -68,7 +68,7 @@ export const RaffleForm = () => {
     <main className="container py-10">
       <div>
         <Form {...form}>
-          <section className="max-w-[1024px] rounded-xl border p-5 mx-auto">
+          <section className="max-w-[1024px] rounded-xl border p-5 mx-auto bg-white/20 backdrop-blur-xl">
             <h1 className="text-2xl font-bold mb-10 ">Crea una nueva sorteo</h1>
             <div>
               {(form.watch("images")?.length ?? 0) > 0 && (
@@ -164,7 +164,11 @@ export const RaffleForm = () => {
                   />
                 </div>
               </div>
-              <Button className="mt-5" type="submit">
+              <Button
+                className="mt-5"
+                type="submit"
+                disabled={form.formState.isSubmitting}
+              >
                 Submit
               </Button>
             </form>

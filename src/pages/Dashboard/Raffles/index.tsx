@@ -29,7 +29,7 @@ export const Raffles = () => {
       <div className="flex flex-wrap gap-4">
         {raffles.map((raffle) => (
           <div key={raffle.id}>
-            <article className="w-[300px] p-4 rounded-md border dark:bg-gray-700">
+            <article className="w-[300px] p-4 rounded-md shadow-md bg-gray-200/50 dark:bg-gray-800/50">
               <div className="w-[200px]rounded-lg overflow-hidden">
                 <p className="capitalize">
                   <strong>{raffle.title}</strong>

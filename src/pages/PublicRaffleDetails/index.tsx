@@ -1,3 +1,4 @@
+import { DialogImages } from "@/components/DialogImages";
 import { TicketCard } from "@/components/TicketCard";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -7,6 +8,7 @@ import type { Raffle } from "@/models/raffles.model";
 import type { Ticket } from "@/models/ticket.model";
 import { getRaffleById } from "@/services/raffles.service";
 import { getTicketsByRaffleId } from "@/services/tickets.service";
+import { InfoIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 export const PublicRaffleDetails = () => {
@@ -67,33 +69,48 @@ export const PublicRaffleDetails = () => {
     }
   }, [raffleId]);
   return (
-    <main className="container grid lg:grid-cols-2 py-10 gap-4">
+    <main className="container grid lg:grid-cols-2 py-10 gap-8">
       <section>
-        <h1 className="text-2xl font-bold">{raffle?.title}</h1>
-        <hr className="my-3" />
+        <h1 className="text-3xl font-extrabold mb-2">{raffle?.title}</h1>
+        <hr className="my-4" />
         {raffle ? (
           <div>
-            <p className="text-gray-500">{raffle.description}</p>
+            <DialogImages images={raffle.images ?? []} />
+            <div className="bg-blue-50 dark:bg-blue-900/30 border-l-4 border-blue-400 dark:border-blue-500 rounded-md p-4 mb-6 flex items-start gap-3 shadow-sm">
+              <InfoIcon />
+              <p className="text-gray-700 dark:text-gray-200 text-base">
+                {raffle.description.charAt(0).toUpperCase() +
+                  raffle.description.slice(1)}
+              </p>
+            </div>
 
-            <div className="rounded-md border p-2 mt-5 grid gap-1">
-              <p>
-                <strong>Precio:</strong>
-                <br />$ {raffle.price} COP
-              </p>
-              <p>
-                <strong>Tickets: </strong>
-                <br />
-                {raffle.ticketsNumber}
-              </p>
-              <p>
-                <strong> Fecha de finalización: </strong>
-                <br />
-                {raffle.finishDate?.toLocaleDateString("es-CO", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                }) || "Hasta vender todos los tickets"}
-              </p>
+            <div className="rounded-xl border bg-white/70 dark:bg-gray-900/60 p-5 shadow-md grid gap-4">
+              <div>
+                <span className="font-semibold text-gray-700 dark:text-gray-200">
+                  Precio:
+                </span>
+                <div className="text-xl font-bold text-blue-600 dark:text-blue-400">
+                  $ {raffle.price?.toLocaleString("es-CO")} COP
+                </div>
+              </div>
+              <div>
+                <span className="font-semibold text-gray-700 dark:text-gray-200">
+                  Tickets:
+                </span>
+                <div className="text-lg">{raffle.ticketsNumber}</div>
+              </div>
+              <div>
+                <span className="font-semibold text-gray-700 dark:text-gray-200">
+                  Fecha de finalización:
+                </span>
+                <div>
+                  {raffle.finishDate?.toLocaleDateString("es-CO", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  }) || "Hasta vender todos los tickets"}
+                </div>
+              </div>
               {!raffle.finishDate?.toString() && (
                 <div className="grid">
                   <Progress value={progress} className="w-full h-2" />
@@ -105,31 +122,24 @@ export const PublicRaffleDetails = () => {
           <p>Cargando...</p>
         )}
 
-        <div className="p-5 mt-5 rounded-md border">
-          {ticketsSelected.length > 0 ? (
-            <div className="">
-              <p>
-                <strong>
-                  {(
+        <div className="p-6 mt-8 rounded-xl border bg-white/70 dark:bg-gray-900/60 shadow-md">
+          <div className="flex items-center justify-between mb-2">
+            <span className="font-medium">Total a pagar:</span>
+            <span className="text-xl font-bold text-green-600 dark:text-green-400">
+              {ticketsSelected.length > 0
+                ? (
                     ticketsSelected.length * (raffle?.price ?? 0)
                   ).toLocaleString("es-CO", {
                     style: "currency",
                     currency: "COP",
-                  })}{" "}
-                  {""}
-                  COP
-                </strong>
-              </p>
-            </div>
-          ) : (
-            <p>
-              <strong>$ 0 COP </strong>
-            </p>
-          )}
-
+                  })
+                : "$ 0"}{" "}
+              COP
+            </span>
+          </div>
           <Button
             type="button"
-            className="mt-5"
+            className="mt-4 w-full"
             disabled={ticketsSelected.length === 0}
             onClick={() => {
               navigate(`${ROUTES.CHECKOUT}`, {
@@ -140,7 +150,8 @@ export const PublicRaffleDetails = () => {
               });
             }}
           >
-            Comprar {ticketsSelected.length} tickets
+            Comprar {ticketsSelected.length > 0 ? ticketsSelected.length : ""}{" "}
+            tickets
           </Button>
         </div>
       </section>
@@ -162,10 +173,10 @@ export const PublicRaffleDetails = () => {
                   setFilteredTickets(tickets);
                 }
               }}
-            ></Input>
+            />
           </div>
         </div>
-        <div className="flex flex-wrap gap-4 max-h-[500px] overflow-y-auto">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 max-h-[500px] overflow-y-auto p-2">
           {filteredTickets.map((ticket) => (
             <div
               key={ticket.id}
@@ -177,7 +188,7 @@ export const PublicRaffleDetails = () => {
               <TicketCard
                 item={ticket}
                 isSelected={ticketsSelected.some((t) => t.id === ticket.id)}
-              ></TicketCard>
+              />
             </div>
           ))}
         </div>

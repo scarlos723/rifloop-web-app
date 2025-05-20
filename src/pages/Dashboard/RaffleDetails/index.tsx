@@ -1,3 +1,4 @@
+import { DialogImages } from "@/components/DialogImages";
 import { TicketCard } from "@/components/TicketCard";
 import { Input } from "@/components/ui/input";
 import { Progress } from "@/components/ui/progress";
@@ -6,6 +7,7 @@ import type { Raffle } from "@/models/raffles.model";
 import type { Ticket } from "@/models/ticket.model";
 import { getRaffleById } from "@/services/raffles.service";
 import { getTicketsByRaffleId } from "@/services/tickets.service";
+import { InfoIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { GoCopy } from "react-icons/go";
 import { useSearchParams } from "react-router-dom";
@@ -74,39 +76,64 @@ export const RaffleDetail = () => {
         <hr className="my-3" />
         {raffle ? (
           <div>
-            <p className="text-gray-500">{raffle.description}</p>
-
-            <div className="rounded-md border p-2 mt-5 grid gap-1">
-              <p>
-                <strong>Precio:</strong>
-                <br />$ {raffle.price} COP
-              </p>
-              <p>
-                <strong>Tickets: </strong>
-                <br />
-                {raffle.ticketsNumber}
-              </p>
-              <p>
-                <strong> Fecha de finalización: </strong>
-                <br />
-                {raffle.finishDate?.toLocaleDateString("es-CO", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                }) || "Hasta vender todos los tickets"}
-              </p>
-              {!raffle.finishDate?.toString() && (
-                <div className="grid">
-                  <p>
-                    <strong>Progreso: </strong>
-                    <br />
-                    {progress}%
+            <div className="">
+              <div>
+                <DialogImages images={raffle.images ?? []} />
+                <div className="bg-blue-50 dark:bg-blue-900/30 border-l-4 border-blue-400 dark:border-blue-500 rounded-md p-4 mb-6 flex items-start gap-3 shadow-sm">
+                  <InfoIcon />
+                  <p className="text-gray-700 dark:text-gray-200 text-base">
+                    {raffle.description.charAt(0).toUpperCase() +
+                      raffle.description.slice(1)}
                   </p>
-                  <Progress value={progress} className="w-full h-2" />
                 </div>
-              )}
+
+                <div className="rounded-xl border bg-white/70 dark:bg-gray-900/60 p-5 shadow-md grid gap-4">
+                  <div>
+                    <span className="font-semibold text-gray-700 dark:text-gray-200">
+                      Precio:
+                    </span>
+                    <div className="text-xl font-bold text-blue-600 dark:text-blue-400">
+                      $ {raffle.price?.toLocaleString("es-CO")} COP
+                    </div>
+                  </div>
+                  <div>
+                    <span className="font-semibold text-gray-700 dark:text-gray-200">
+                      Tickets:
+                    </span>
+                    <div className="text-lg">{raffle.ticketsNumber}</div>
+                  </div>
+                  <div>
+                    <span className="font-semibold text-gray-700 dark:text-gray-200">
+                      Fecha de finalización:
+                    </span>
+                    <div>
+                      {raffle.finishDate?.toLocaleDateString("es-CO", {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      }) || "Hasta vender todos los tickets"}
+                    </div>
+                  </div>
+                  {!raffle.finishDate?.toString() && (
+                    <div className="grid">
+                      <Progress value={progress} className="w-full h-2" />
+                    </div>
+                  )}
+                  {!raffle.finishDate?.toString() && (
+                    <div className="grid">
+                      <p>
+                        <strong>Progreso: </strong>
+                        <br />
+                        {progress}%
+                      </p>
+                      <Progress value={progress} className="w-full h-2" />
+                    </div>
+                  )}
+                </div>
+              </div>
+
               {raffle.id !== undefined && (
-                <div className="mt-4">
+                <div className="rounded-lg mt-4 bg-white/70 dark:bg-gray-900/60 p-5 shadow-m">
                   <p>
                     <strong>Enlace público: </strong>
                     <br />
@@ -115,7 +142,7 @@ export const RaffleDetail = () => {
                     </small>
                   </p>
                   <button
-                    className="border p-2 flex gap-4 items-center justify-between rounded-md transition hover:bg-gray-700 cursor-copy "
+                    className="border p-2 flex gap-4 items-center justify-between rounded-md transition hover:bg-gray-700 hover:text-white cursor-copy "
                     onClick={() => {
                       if (!raffle.id) return;
                       navigator.clipboard.writeText(getPublicLink(raffle.id));

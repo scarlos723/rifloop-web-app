@@ -5,11 +5,11 @@ export const TicketCard = (props: { item: Ticket; isSelected?: boolean }) => {
 
   return (
     <article
-      className={
+      className={`transition-all rounded-sm ${
         isSelected
-          ? "border-2 border-amber-400 rounded-md p-1 cursor-pointer"
-          : ""
-      }
+          ? "ring-2 ring-blue-500 scale-105 p-1"
+          : "hover:ring-2 hover:ring-blue-300 hover:p-[0.5px]"
+      }`}
     >
       <div className="grid grid-cols-[40px_1fr] cursor-default ">
         <div className="relative flex flex-col justify-center items-center shadow-lg rounded-tr-2xl bg-gray-700 rounded-br-2xl text-white">

@@ -63,52 +63,65 @@ export const Checkout = () => {
 
   return (
     <main className="container max-w-md mx-auto py-10">
-      <h1 className="text-2xl font-bold mb-6">Checkout </h1>
-
-      <div className="grid">
-        <h2 className="text-lg ml-auto">
-          <strong>Total:</strong>
-          {ticketsSelected.length > 0 && (
-            <strong>
-              {(ticketsSelected.length * (raffle?.price ?? 0)).toLocaleString(
-                "es-CO",
-                {
-                  style: "currency",
-                  currency: "COP",
-                }
-              )}{" "}
-              {""}
+      <div className="backdrop-blur-lg bg-white/40 dark:bg-gray-900/70 rounded-xl shadow-lg p-8 border border-gray-200 dark:border-gray-800">
+        <h1 className="text-3xl font-extrabold mb-2 text-center  dark:text-blue-300">
+          Checkout
+        </h1>
+        <hr className="my-4" />
+        <div className="mb-6">
+          <h2 className="text-lg font-semibold text-gray-700 dark:text-gray-200 flex items-center justify-between">
+            <span>Total a pagar:</span>
+            <span className="text-2xl font-bold text-green-600 dark:text-green-400">
+              {ticketsSelected.length > 0
+                ? (
+                    ticketsSelected.length * (raffle?.price ?? 0)
+                  ).toLocaleString("es-CO", {
+                    style: "currency",
+                    currency: "COP",
+                  })
+                : "$ 0"}{" "}
               COP
-            </strong>
-          )}
-        </h2>
+            </span>
+          </h2>
+          <div className="mt-2 text-sm text-gray-500 dark:text-gray-400">
+            {ticketsSelected.length > 0 && (
+              <span>
+                Tus Números :{" [ "}
+                <span className="font-bold text-blue-600 dark:text-blue-300">
+                  {ticketsSelected.map((t) => t.ticketNumber).join(", ")}
+                </span>
+                {" ]"}
+              </span>
+            )}
+          </div>
+        </div>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
+            <FormFieldContainer
+              form={form}
+              name="name"
+              label="Nombre completo"
+              type="text"
+            />
+            <FormFieldContainer
+              form={form}
+              type="email"
+              name="email"
+              label="Correo electrónico"
+            />
+            <FormFieldContainer
+              form={form}
+              name="phone"
+              label="Número de teléfono"
+              type="tel"
+              placeholder="Ej: 3001234567"
+            />
+            <Button type="submit" disabled={form.formState.isSubmitting}>
+              Comprar tickets
+            </Button>
+          </form>
+        </Form>
       </div>
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-          <FormFieldContainer
-            form={form}
-            name="name"
-            label="Nombre completo"
-            type="text"
-          />
-          <FormFieldContainer
-            form={form}
-            type="email"
-            name="email"
-            label="Correo electrónico"
-          />
-          <FormFieldContainer
-            form={form}
-            name="phone"
-            label="Número de teléfono"
-            type="tel"
-            placeholder="Ej: 3001234567"
-          />
-          <Button type="submit" className="w-full">
-            Comprar tickets
-          </Button>
-        </form>
-      </Form>
     </main>
   );
 };

@@ -45,9 +45,11 @@ export const DropZoneFiles = (props: {
       >
         <input {...getInputProps()} />
         {isDragActive ? (
-          <p className="text-sm text-gray-500">Suelta los archivos aquí ...</p>
+          <p className="text-sm text-gray-500 dark:text-white">
+            Suelta los archivos aquí ...
+          </p>
         ) : (
-          <div className="text-sm text-gray-500 text-center flex flex-col gap-1 items-center">
+          <div className="text-sm text-gray-500 text-center flex flex-col gap-1 items-center dark:text-white">
             <div>{!onlyImages ? <ImageIcon /> : <PackagePlusIcon />}</div>
             <p className="cursor-default">
               Arrastra y suelta algunos archivos aquí, o haz clic para
@@ -58,7 +60,10 @@ export const DropZoneFiles = (props: {
       </div>
       <div className="flex flex-col gap-2 mt-4">
         {listFiles.map((file, i) => (
-          <div key={i} className="text-sm text-gray-700 border px-3 rounded-sm">
+          <div
+            key={i}
+            className="text-sm text-gray-700 border px-3 rounded-sm dark:text-white"
+          >
             <span>
               - {file.name} - {file.size} bytes
             </span>
