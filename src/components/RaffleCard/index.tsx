@@ -33,7 +33,7 @@ export const RaffleCard = (props: { item: Raffle }) => {
   }, [showDescription]);
 
   return (
-    <article className="border shadow-md p-5 mb-4 rounded-lg flex flex-col box-content w-[280px] md:w-[220px] lg:w-[232px] dark:bg-gray-800">
+    <article className="border shadow-md p-5 mb-4 rounded-lg flex flex-col box-content w-[280px] md:w-[220px] lg:w-[232px] dark:bg-gray-800/50">
       <div className=" w-full h-[200px] border rounded-md overflow-hidden shadow mb-2">
         {(item?.images ?? []).length > 0 ? (
           <img
