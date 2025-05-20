@@ -1,5 +1,6 @@
 import { z } from "zod";
 export const formSchema = z.object({
+  userId: z.string().nonempty({ message: "Campo requerido" }),
   title: z.string().nonempty({ message: "Campo requerido" }),
   description: z.string().nonempty({ message: "Campo requerido" }),
   price: z.string().nonempty({ message: "Campo requerido" }),

@@ -13,7 +13,7 @@ export const createTickets = async (props: {
 
   const { numberOfTickets, raffleId, ticketPrice, digit } = props;
   const tickets: Ticket[] = [];
-  console.log("props", props);
+
   for (let i = 0; i < numberOfTickets; i++) {
     tickets.push({
       raffleId,
@@ -23,7 +23,6 @@ export const createTickets = async (props: {
       ticketDate: new Date().toISOString(),
     });
   }
-  console.log("tickets", tickets);
 
   return new Promise((resolve, reject) => {
     const transaction = db.transaction(STORE_NAME, "readwrite");

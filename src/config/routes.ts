@@ -5,6 +5,9 @@ export const ROUTES = {
   REGISTER: "/register",
   LOGIN: "/login",
   NOT_FOUND: "*",
+  PUBLIC_RAFFLES: "/sorteos",
+  PUBLIC_RAFFLE_DETAILS: "/sorteo",
+  CHECKOUT: "/checkout",
   DASHBOARD: {
     ROOT: `${DASHBOARD_PATH}`,
     PROFILE: `${DASHBOARD_PATH}/perfil`,

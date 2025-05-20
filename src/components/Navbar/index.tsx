@@ -1,61 +1,19 @@
-import { ROUTES } from "@/config/routes";
-import { SignOutButton, useUser } from "@clerk/clerk-react";
-import { FaSignOutAlt } from "react-icons/fa";
+import { useUser } from "@clerk/clerk-react";
 import { Link } from "react-router-dom";
-import { Button } from "../ui/button";
+import { DesktopMenu } from "./DesktopMenu";
+import { MobileMenu } from "./MobileMenu";
 export const Navbar = () => {
   const { isSignedIn } = useUser();
   return (
     <header className="px-10 py-4">
-      <nav className="rounded-full py-4 px-10 shadow-md ">
-        <ul className="flex gap-4 justify-between items-center">
-          <li className="font-bold">
+      <nav className="rounded-full py-4 px-10 shadow-md  dark:border dark:border-gray-700 bg-white dark:bg-gray-800">
+        <div className="flex gap-4 justify-between items-center">
+          <div className="font-bold">
             <Link to="/">Rifloop</Link>
-          </li>
-
-          <li className="flex items-center gap-4">
-            {isSignedIn ? (
-              <>
-                <Link className="hidden lg:block" to={ROUTES.DASHBOARD.ROOT}>
-                  Dashboard
-                </Link>
-
-                <Link
-                  className="hidden lg:block"
-                  to={ROUTES.DASHBOARD.CREATE_RAFFLE}
-                >
-                  Crear Rifa
-                </Link>
-                <Link
-                  className="hidden lg:block"
-                  to={ROUTES.DASHBOARD.LIST_RAFFLES}
-                >
-                  Sorteos
-                </Link>
-
-                <SignOutButton>
-                  <Button
-                    variant={"outline"}
-                    type="button"
-                    className="flex items-center gap-2 text-red-500  border-red-500"
-                  >
-                    <span className="hidden lg:block">Cerrar Sesión</span>
-                    <FaSignOutAlt />
-                  </Button>
-                </SignOutButton>
-              </>
-            ) : (
-              <>
-                <Button asChild>
-                  <Link to={ROUTES.LOGIN}>Iniciar Sesión</Link>
-                </Button>
-                <Button variant={"secondary"} asChild>
-                  <Link to={ROUTES.REGISTER}>Registrarse</Link>
-                </Button>
-              </>
-            )}
-          </li>
-        </ul>
+          </div>
+          <DesktopMenu isSignedIn={isSignedIn} />
+          <MobileMenu isSignedIn={isSignedIn} />
+        </div>
       </nav>
     </header>
   );

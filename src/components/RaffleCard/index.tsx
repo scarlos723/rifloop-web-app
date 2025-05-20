@@ -31,8 +31,9 @@ export const RaffleCard = (props: { item: Raffle }) => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [showDescription]);
+
   return (
-    <article className="border shadow-md p-5 mb-4 rounded-lg flex flex-col box-content md:w-[220px] lg:w-[232px]">
+    <article className="border shadow-md p-5 mb-4 rounded-lg flex flex-col box-content w-[280px] md:w-[220px] lg:w-[232px] dark:bg-gray-800">
       <div className=" w-full h-[200px] border rounded-md overflow-hidden shadow mb-2">
         {(item?.images ?? []).length > 0 ? (
           <img
@@ -52,7 +53,7 @@ export const RaffleCard = (props: { item: Raffle }) => {
       </div>
       <div className="h-[200px]">
         <h2 className="font-bold capitalize text-xl line-clamp-3">
-          {item.title} moto asd 2323 de 2010 a
+          {item.title}
         </h2>
         <div className="relative inline-block" ref={descRef}>
           <span
@@ -64,10 +65,6 @@ export const RaffleCard = (props: { item: Raffle }) => {
           {showDescription && (
             <div className="absolute left-1/2 z-10 w-64 -translate-x-1/2 mt-2 px-4 py-2 rounded bg-gray-900 text-white text-sm ">
               {item.description}
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-              Voluptate aut nostrum nam doloribus dolor dolore optio mollitia
-              neque consectetur nesciunt rem ducimus provident, in vitae
-              reprehenderit molestiae nihil? Fugit, in.
             </div>
           )}
         </div>
@@ -89,7 +86,7 @@ export const RaffleCard = (props: { item: Raffle }) => {
         <Button
           type="button"
           onClickCapture={() => {
-            navigate(`${ROUTES.DASHBOARD.RAFFLE}?raffleId=${item.id}`);
+            navigate(`${ROUTES.PUBLIC_RAFFLE_DETAILS}?raffleId=${item.id}`);
           }}
         >
           Comprar ticket

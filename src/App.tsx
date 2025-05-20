@@ -4,6 +4,7 @@ import { NotFound } from "./components/NotFound";
 import { ROUTES } from "./config/routes";
 import { LandingLayout } from "./LandingLayout";
 import { initDB } from "./lib/db";
+import { Checkout } from "./pages/Checkout";
 import { Dashboard } from "./pages/Dashboard";
 import { Profile } from "./pages/Dashboard/Profile";
 import { RaffleDetail } from "./pages/Dashboard/RaffleDetails";
@@ -11,6 +12,8 @@ import { RaffleForm } from "./pages/Dashboard/RaffleForm";
 import { Raffles } from "./pages/Dashboard/Raffles";
 import { Home } from "./pages/Home";
 import { Login } from "./pages/Login";
+import { PublicRaffleDetails } from "./pages/PublicRaffleDetails";
+import { PublicRaffles } from "./pages/PublicRaffles";
 import { Register } from "./pages/Register";
 const initializeApp = async () => {
   try {
@@ -37,6 +40,18 @@ function App() {
         {
           path: ROUTES.LOGIN,
           element: <Login />,
+        },
+        {
+          path: ROUTES.PUBLIC_RAFFLES,
+          element: <PublicRaffles />,
+        },
+        {
+          path: ROUTES.PUBLIC_RAFFLE_DETAILS,
+          element: <PublicRaffleDetails />,
+        },
+        {
+          path: ROUTES.CHECKOUT,
+          element: <Checkout />,
         },
         {
           path: ROUTES.DASHBOARD.ROOT,

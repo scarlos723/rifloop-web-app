@@ -55,10 +55,10 @@
   --sidebar-ring: oklch(0.704 0.04 256.788);
 }
 
-
 body {
   margin: 0;
   width: 100%;
+  min-height: 100dvh;
 }
 
 @media (prefers-color-scheme: light) {

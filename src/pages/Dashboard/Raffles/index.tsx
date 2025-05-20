@@ -1,30 +1,55 @@
-import { RaffleCard } from "@/components/RaffleCard";
+import { ROUTES } from "@/config/routes";
 import type { Raffle } from "@/models/raffles.model";
-import { getAllRaffles } from "@/services/raffles.service";
+import { getRafflesByUserId } from "@/services/raffles.service";
+import { useUser } from "@clerk/clerk-react";
 
+import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 export const Raffles = () => {
+  const { user } = useUser();
   const [raffles, setRaffles] = useState<Raffle[]>([]);
-
+  const navigate = useNavigate();
   useEffect(() => {
-    const fetchAllRaffles = async () => {
+    const fetchAllRaffles = async (id: string) => {
       try {
-        const response = await getAllRaffles();
-        console.log("Raffles response", response);
+        const response = await getRafflesByUserId(id);
         setRaffles(response);
       } catch (error) {
         console.error("Error fetching raffles", error);
       }
     };
-    fetchAllRaffles();
-  }, []);
+    if (user?.id) {
+      fetchAllRaffles(user.id);
+    }
+  }, [user]);
   return (
     <main className="container py-10">
       <h2 className="text-2xl font-bold mb-5">Tus rifas</h2>
       <div className="flex flex-wrap gap-4">
         {raffles.map((raffle) => (
           <div key={raffle.id}>
-            <RaffleCard item={raffle}></RaffleCard>
+            <article className="w-[300px] p-4 rounded-md border dark:bg-gray-700">
+              <div className="w-[200px]rounded-lg overflow-hidden">
+                <p className="capitalize">
+                  <strong>{raffle.title}</strong>
+                </p>
+              </div>
+
+              <p className="text-gray-500">{raffle.description}</p>
+              <div className="flex justify-between items-center mt-4">
+                <p>{raffle.ticketsNumber} tickets</p>
+                <Button
+                  onClickCapture={() => {
+                    navigate(
+                      `${ROUTES.DASHBOARD.RAFFLE}?raffleId=${raffle.id}`
+                    );
+                  }}
+                >
+                  ver detalles
+                </Button>
+              </div>
+            </article>
           </div>
         ))}
       </div>

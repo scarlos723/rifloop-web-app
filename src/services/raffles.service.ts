@@ -12,7 +12,6 @@ export const createRaffle = async (raffle: Raffle): Promise<number> => {
     const request = store.add(raffle);
 
     request.onsuccess = async () => {
-      console.log("ID de la rifa creada:", request.result); // Log del ID generado
       await createTickets({
         numberOfTickets: raffle.ticketsNumber,
         raffleId: request.result as number,
@@ -73,6 +72,22 @@ export const deleteRaffle = async (id: number): Promise<void> => {
     const request = store.delete(id);
 
     request.onsuccess = () => resolve();
+    request.onerror = () => reject(request.error);
+  });
+};
+
+export const getRafflesByUserId = async (userId: string): Promise<Raffle[]> => {
+  const db = await initDB();
+  return new Promise((resolve, reject) => {
+    const transaction = db.transaction(STORE_NAME, "readonly");
+    const store = transaction.objectStore(STORE_NAME);
+    const request = store.getAll();
+
+    request.onsuccess = () => {
+      const raffles: Raffle[] = request.result as Raffle[];
+      const userRaffles = raffles.filter((raffle) => raffle.userId === userId);
+      resolve(userRaffles);
+    };
     request.onerror = () => reject(request.error);
   });
 };

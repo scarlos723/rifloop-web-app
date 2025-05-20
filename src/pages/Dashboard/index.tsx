@@ -12,7 +12,7 @@ export const Dashboard = () => {
     const fetchAllRaffles = async () => {
       try {
         const response = await getAllRaffles();
-        console.log("Raffles response", response);
+
         setRaffles(response);
       } catch (error) {
         console.error("Error fetching raffles", error);
@@ -21,7 +21,7 @@ export const Dashboard = () => {
     fetchAllRaffles();
   }, []);
   return (
-    <main className="container bg-white py-10">
+    <main className="container py-10">
       {raffles.length > 0 ? <RafflesList raffles={raffles} /> : <NoRaffles />}
     </main>
   );

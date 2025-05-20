@@ -5,42 +5,40 @@ import { Form } from "@/components/ui/form";
 import { ROUTES } from "@/config/routes";
 import { createRaffle } from "@/services/raffles.service";
 import { uploadRaffleImages } from "@/services/storage.service";
+import { useUser } from "@clerk/clerk-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { formSchema, type FormSchema } from "./schema";
 export const RaffleForm = () => {
+  const { user } = useUser();
   const form = useForm({
     defaultValues: {
+      userId: user?.id,
       digit: { value: 1, label: "1" },
       ticketsNumber: "10",
     },
     resolver: zodResolver(formSchema),
   });
-  useEffect(() => {
-    console.log("errors", form.formState.errors);
-  }, [form.formState.errors]);
   const navigate = useNavigate();
 
   const onSubmitFnc = async (data: FormSchema) => {
-    console.log("data", data);
     try {
       const imageUrls = data.images && (await uploadRaffleImages(data.images));
 
       const adaptedData = {
         ...data,
+
         images: imageUrls, // Solo se guarda el nombre del archivo
         price: Number(data.price.replace(/\D/g, "")), // Elimina caracteres no numéricos
         ticketsNumber: Number(data.ticketsNumber),
         finishDate: data.finishDate ? new Date(data.finishDate) : undefined,
         digit: data.digit.value,
       };
-      console.log("adaptedData", adaptedData);
 
       const raffleId = await createRaffle(adaptedData);
-      console.log("Raffle created with ID:", raffleId);
-      navigate(`${ROUTES.DASHBOARD.LIST_RAFFLES}`);
+      navigate(`${ROUTES.DASHBOARD.RAFFLE}?raffleId=${raffleId}`);
     } catch (error) {
       console.error("Error creating raffle:", error);
     }
@@ -62,7 +60,6 @@ export const RaffleForm = () => {
   useEffect(() => {
     if (digit.value) {
       const ticketsCount = getTicketsCountByDigit(digit.value).toString();
-      console.log("ticketsCount", ticketsCount);
       form.setValue("ticketsNumber", ticketsCount);
     }
   }, [digit]);
@@ -96,7 +93,7 @@ export const RaffleForm = () => {
                   label="Nombre del sorteo *"
                   placeholder="Mi sorteo"
                 />
-                <div className="flex items-center gap-4">
+                <div className="grid md:flex items-center gap-4">
                   <FormFieldContainer
                     form={form}
                     type="react-select"
@@ -125,12 +122,12 @@ export const RaffleForm = () => {
                   label="Fecha de finalización"
                   placeholder="Fecha del sorteo"
                 />
-                <div className="flex gap-4 ">
+                <div className="grid md:flex gap-4 ">
                   <FormFieldContainer
                     form={form}
                     type="currency"
                     name="price"
-                    label="Precio $COP *"
+                    label="Precio del ticket $COP *"
                     placeholder="$1.000"
                   />
 
