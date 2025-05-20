@@ -21,12 +21,18 @@ export const MobileMenu = (props: { isSignedIn: boolean | undefined }) => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isOpen]);
   return (
-    <div className="relative lg:hidden" ref={menuRef}>
+    <div className="lg:hidden" ref={menuRef}>
       <button onClick={() => setIsOpen((prev) => !prev)}>
         {isOpen ? <IoClose /> : <TiThMenu />}
       </button>
-      {isOpen && (
-        <div className="absolute top-16 right-0 bg-white shadow-md rounded-lg p-4">
+      <div
+        className={`transition-all absolute top-0 right-0 ${
+          isOpen
+            ? "translate-y-16 opacity-100"
+            : "-translate-y-[150%] opacity-0"
+        }`}
+      >
+        <div className=" bg-white shadow-md rounded-lg p-4 dark:bg-gray-800 dark:text-white">
           {isSignedIn ? (
             <ul className=" items-center gap-4 grid">
               <li>
@@ -60,7 +66,7 @@ export const MobileMenu = (props: { isSignedIn: boolean | undefined }) => {
             </div>
           )}
         </div>
-      )}
+      </div>
     </div>
   );
 };

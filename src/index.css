@@ -5,7 +5,7 @@
 
 @layer base {
   .container {
-    @apply px-10 md:px-20 min-w-full max-w-full w-full;
+    @apply px-5 md:px-20 min-w-full max-w-full w-full;
   }
 }
 :root {
