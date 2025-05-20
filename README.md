@@ -94,3 +94,28 @@ cd rifloop
 pnpm install
 pnpm dev
 ```
+
+---
+
+## 🎯 Fines Demostrativos y Futuro del Proyecto
+
+**Rifloop** ha sido desarrollado únicamente con fines demostrativos y académicos, cumpliendo con los requisitos del reto:
+
+- No ha tenido usuarios reales ni ha estado en producción previamente.
+- Su despliegue y código son públicos para revisión y evaluación.
+
+### 💡 Idea Original y Visión a Futuro
+
+La idea principal de Rifloop es permitir a cualquier persona crear un sorteo y vender los boletos en línea de forma sencilla y segura.  
+Sin embargo, la visión original del proyecto iba más allá: **la intención era que los usuarios no solo compraran un boleto, sino que adquirieran una imagen de wallpaper exclusiva, la cual estaría asociada a un número de boleto**. Así, cada boleto vendido sería también una imagen digital única, y el sorteo se convertiría en una experiencia más atractiva y coleccionable.
+
+Por temas de tiempo, esta funcionalidad de compra de imágenes no pudo ser implementada en esta versión. La idea era simplemente asociar los enlaces de las imágenes a los boletos y, posteriormente, mostrarlas al usuario, dando la sensación de que se adquiere una imagen digital que además participa por un premio.
+
+### 🚀 Próximos pasos
+
+- Asociar imágenes únicas a cada boleto vendido.
+- Permitir a los usuarios visualizar y descargar su wallpaper adquirido.
+- Mejorar la experiencia de compra y personalización de sorteos.
+- Explorar integraciones con tecnologías NFT para dar autenticidad a las imágenes.
+
+---
