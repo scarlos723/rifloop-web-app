@@ -47,7 +47,7 @@ La autenticación y gestión de usuarios en **Rifloop** está implementada compl
 
 ### Formulario de Creación de Rifa
 
-![Formulario](./readme_images/crear_sorteo_form.png)
+![Formulario](./readme_images/crear_rifa_form.png)
 
 ### Dashboard de Usuario
 
