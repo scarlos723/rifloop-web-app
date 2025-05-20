@@ -33,7 +33,7 @@ export const RaffleCard = (props: { item: Raffle }) => {
   }, [showDescription]);
 
   return (
-    <article className="border shadow-md p-5 mb-4 rounded-lg flex flex-col box-content w-[280px] md:w-[220px] lg:w-[232px] dark:bg-gray-800/50">
+    <article className="shadow-md p-5 mb-4 rounded-lg flex flex-col box-content w-[280px] md:w-[220px] lg:w-[232px] backdrop-blur-lg bg-white/30 dark:bg-gray-800/50">
       <div className=" w-full h-[200px] border rounded-md overflow-hidden shadow mb-2">
         {(item?.images ?? []).length > 0 ? (
           <img
@@ -44,7 +44,7 @@ export const RaffleCard = (props: { item: Raffle }) => {
         ) : (
           <div className="w-full h-full flex items-center justify-center">
             <small>
-              <p className="text-center text-gray-500">
+              <p className="text-center text-white dark:text-gray-400">
                 No hay imagen disponible
               </p>
             </small>
@@ -57,7 +57,7 @@ export const RaffleCard = (props: { item: Raffle }) => {
         </h2>
         <div className="relative inline-block" ref={descRef}>
           <span
-            className="text-gray-500 font-bold underline line-clamp-1  cursor-pointer"
+            className="text-gray-300 font-bold underline line-clamp-1  cursor-pointer"
             onClick={() => setShowDescription(true)}
           >
             {item.description}
