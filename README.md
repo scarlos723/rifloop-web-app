@@ -55,7 +55,7 @@ La autenticación y gestión de usuarios en **Rifloop** está implementada compl
 
 ### Detalles de una Rifa
 
-![Detalles](./readme_images/detalles_sorteo.png)
+![Detalles](./readme_images/detalles_rifa.png)
 
 ### Selección y Compra de Boletos
 
