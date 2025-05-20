@@ -18,7 +18,7 @@ export const Home = () => {
         </p>
         <p>
           ¿Listo para lanzar tu primer sorteo? Crea tu cuenta gratis y empieza a
-          rifar de forma simple, profesional y segura.
+          sorteor de forma simple, profesional y segura.
         </p>
         <div className="flex justify-center">
           <Button asChild>
@@ -27,7 +27,7 @@ export const Home = () => {
         </div>
       </div>
       <section className="mt-10">
-        <h2 className="text-2xl font-bold mb-5">Rifas destacadas</h2>
+        <h2 className="text-2xl font-bold mb-5">sorteos destacadas</h2>
         <ListRaffles />
       </section>
     </main>

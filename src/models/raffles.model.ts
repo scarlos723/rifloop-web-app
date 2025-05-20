@@ -1,6 +1,6 @@
 export interface Raffle {
   id?: number; // Será generado automáticamente
-  userId: string; // ID del usuario que creó la rifa
+  userId: string; // ID del usuario que creó la sorteo
   title: string;
   description: string;
   price: number;

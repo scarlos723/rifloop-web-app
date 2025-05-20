@@ -5,7 +5,6 @@ import { ROUTES } from "./config/routes";
 import { LandingLayout } from "./LandingLayout";
 import { initDB } from "./lib/db";
 import { Checkout } from "./pages/Checkout";
-import { Dashboard } from "./pages/Dashboard";
 import { Profile } from "./pages/Dashboard/Profile";
 import { RaffleDetail } from "./pages/Dashboard/RaffleDetails";
 import { RaffleForm } from "./pages/Dashboard/RaffleForm";
@@ -59,7 +58,7 @@ function App() {
           children: [
             {
               index: true,
-              element: <Dashboard />,
+              element: <Raffles />,
             },
             {
               path: ROUTES.DASHBOARD.PROFILE,

@@ -3,7 +3,7 @@ import type { Raffle } from "@/models/raffles.model";
 import { createTickets } from "./tickets.service";
 const STORE_NAME = "raffles";
 
-// Crear una rifa
+// Crear una sorteo
 export const createRaffle = async (raffle: Raffle): Promise<number> => {
   const db = await initDB();
   return new Promise((resolve, reject) => {
@@ -24,7 +24,7 @@ export const createRaffle = async (raffle: Raffle): Promise<number> => {
   });
 };
 
-// Obtener todas las rifas
+// Obtener todas las sorteos
 export const getAllRaffles = async (): Promise<Raffle[]> => {
   const db = await initDB();
   return new Promise((resolve, reject) => {
@@ -37,7 +37,7 @@ export const getAllRaffles = async (): Promise<Raffle[]> => {
   });
 };
 
-// Obtener una rifa por ID
+// Obtener una sorteo por ID
 export const getRaffleById = async (id: number): Promise<Raffle | null> => {
   const db = await initDB();
   return new Promise((resolve, reject) => {
@@ -50,7 +50,7 @@ export const getRaffleById = async (id: number): Promise<Raffle | null> => {
   });
 };
 
-// Actualizar una rifa
+// Actualizar una sorteo
 export const updateRaffle = async (raffle: Raffle): Promise<void> => {
   const db = await initDB();
   return new Promise((resolve, reject) => {
@@ -63,7 +63,7 @@ export const updateRaffle = async (raffle: Raffle): Promise<void> => {
   });
 };
 
-// Eliminar una rifa
+// Eliminar una sorteo
 export const deleteRaffle = async (id: number): Promise<void> => {
   const db = await initDB();
   return new Promise((resolve, reject) => {

@@ -69,7 +69,7 @@ export const RaffleForm = () => {
       <div>
         <Form {...form}>
           <section className="max-w-[1024px] rounded-xl border p-5 mx-auto">
-            <h1 className="text-2xl font-bold mb-10 ">Crea una nueva rifa</h1>
+            <h1 className="text-2xl font-bold mb-10 ">Crea una nueva sorteo</h1>
             <div>
               {(form.watch("images")?.length ?? 0) > 0 && (
                 <div className="flex gap-2 mb-4">

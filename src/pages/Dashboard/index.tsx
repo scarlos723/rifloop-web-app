@@ -30,12 +30,12 @@ export const Dashboard = () => {
 const NoRaffles = () => (
   <div className="container">
     <div className="container text-center py-10">
-      <h1 className="text-2xl font-bold mb-4">No tienes rifas creadas</h1>
+      <h1 className="text-2xl font-bold mb-4">No tienes sorteos creadas</h1>
       <p className="text-gray-600 mb-6">
-        Aún no has creado ninguna rifa. ¡Por favor, crea una para comenzar!
+        Aún no has creado ninguna sorteo. ¡Por favor, crea una para comenzar!
       </p>
       <Button asChild>
-        <Link to={ROUTES.DASHBOARD.CREATE_RAFFLE}>Crear una rifa</Link>
+        <Link to={ROUTES.DASHBOARD.CREATE_RAFFLE}>Crear una sorteo</Link>
       </Button>
     </div>
   </div>
@@ -44,7 +44,7 @@ const NoRaffles = () => (
 const RafflesList = ({ raffles }: { raffles: Raffle[] }) => {
   return (
     <>
-      <h2 className="text-2xl font-bold mb-5">Tus rifas</h2>
+      <h2 className="text-2xl font-bold mb-5">Tus sorteos</h2>
       <div className="flex flex-wrap gap-4">
         {raffles.map((raffle) => (
           <div key={raffle.id}>

@@ -33,11 +33,9 @@ export const MobileMenu = (props: { isSignedIn: boolean | undefined }) => {
                 <Link to={ROUTES.DASHBOARD.ROOT}>Dashboard</Link>
               </li>
               <li>
-                <Link to={ROUTES.DASHBOARD.CREATE_RAFFLE}>Crear Rifa</Link>
+                <Link to={ROUTES.DASHBOARD.CREATE_RAFFLE}>Crear sorteo</Link>
               </li>
-              <li>
-                <Link to={ROUTES.DASHBOARD.LIST_RAFFLES}>Mis Sorteos</Link>
-              </li>
+
               <li>
                 <SignOutButton>
                   <Button

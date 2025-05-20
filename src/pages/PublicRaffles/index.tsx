@@ -22,14 +22,14 @@ export const PublicRaffles = () => {
   return (
     <main className="container">
       <h1 className="text-2xl font-bold my-10">
-        Explora Rifas Públicas
+        Explora sorteos Públicas
         <span className="text-gray-500 text-sm">
           {" "}
           (Puedes participar sin necesidad de registrarte)
         </span>
       </h1>
       <Input
-        placeholder="Buscar rifas"
+        placeholder="Buscar sorteos"
         className="mb-10"
         onChange={(e) => {
           const searchValue = e.target.value.toLowerCase();

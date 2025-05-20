@@ -25,7 +25,7 @@ export const Raffles = () => {
   }, [user]);
   return (
     <main className="container py-10">
-      <h2 className="text-2xl font-bold mb-5">Tus rifas</h2>
+      <h2 className="text-2xl font-bold mb-5">Tus sorteos</h2>
       <div className="flex flex-wrap gap-4">
         {raffles.map((raffle) => (
           <div key={raffle.id}>
