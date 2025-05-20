@@ -16,6 +16,12 @@ La aplicación está pensada para que cualquier persona pueda crear un sorteo, p
 
 ---
 
+## 🌓 Modo Claro y Oscuro
+
+La aplicación cuenta con un **toggle** en la parte superior izquierda que permite cambiar fácilmente entre **modo claro (light mode)** y **modo oscuro (dark mode)**, adaptando la experiencia visual a las preferencias del usuario.
+
+---
+
 ## 🛠️ Tecnologías Utilizadas
 
 - ⚛️ React
